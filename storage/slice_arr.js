@@ -8,7 +8,7 @@ const slice_arr = createSlice(
             Array_size: 10,
             max_Element: 50,
             min_Element: 5,
-            speed: 100
+            speed: 500
         },
         reducers:{
             setData: (state, action) => {state.data = [...action.payload]},

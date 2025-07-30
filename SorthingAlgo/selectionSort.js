@@ -61,7 +61,7 @@ export default function Selection_sort_compo({ arr, speedRef }) {
     return (
         <div>
             <h3 className="text-2xl">{sorted === true ? "Sorted Array" : "Unsorted Array"}</h3>
-            <div className="flex flex-wrap gap-2 relative mt-10 border-2 p-2 rounded-md">
+            <div className="flex flex-wrap gap-2 relative mt-15 border-2 p-2 rounded-md">
                 {localArr.map((element, index) => (
                     <div key={index} className="relative flex flex-col items-center justify-center">
                         <div
@@ -117,8 +117,8 @@ export default function Selection_sort_compo({ arr, speedRef }) {
                     </div>
                 ))}
             </div>
-            <div className="mt-10">
-                <button onClick={() => {if(stopRef.current) selectionSort()}} className="cursor-pointer border-2 px-2 py-1 rounded-sm">Start</button>
+            <div className="mt-15">
+                <button onClick={() => {if(stopRef.current) selectionSort()}} className="cursor-pointer border-2 px-4 py-2 rounded-sm bg-green-200 hover:bg-green-300">Start</button>
             </div>
         </div>
     )

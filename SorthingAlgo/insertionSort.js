@@ -1,53 +1,53 @@
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 
-export default function Bubble({ arr, speedRef }) {
+
+export default function InsertionSort_compo({ arr, speedRef }) {
     const [compare, setCompare] = useState([]);
     const [swap, setSwap] = useState([]);
     const [localArr, setLocalArr] = useState([...arr]);
+    const [comp, setComp] = useState();
     const stopRef = useRef(true);
     const latestSpeed = useRef(speedRef);
     const [sorted, setSorted] = useState(false);
 
-
     useEffect(() => {
-        stopRef.current = true;
         setLocalArr([...arr]);
+        stopRef.current = true;
+        setSorted(false);
         setCompare([]);
         setSwap([]);
-    }, [arr]);
+    }, [arr])
 
     useEffect(() => {
         latestSpeed.current = speedRef;
-    }, [speedRef]);
-
-    function sleep(ms) {
+    }, [speedRef])
+    function sleep(ms){
         return new Promise((resolve) => setTimeout(resolve, ms));
     }
 
-    async function bubbleSort() {
+    async function insertionSort() {
         stopRef.current = false;
         const copy = [...localArr];
         let n = copy.length;
-        for (let i = 0; i < n - 1; i++) {
-            let swapped = false;
-            for (let j = 0; j < n - i - 1; j++) {
-                if (stopRef.current) return;
-                setCompare([j, j + 1]);
-                await sleep(latestSpeed.current);
+        for (let i = 1; i < n; i++) {
+            let key = copy[i];
+            let j = i - 1;
+            while (j >= 0 && copy[j] > key) {
+                setCompare([j+1, j]);
+                await sleep(latestSpeed.current)
                 setCompare([]);
-                if (copy[j] > copy[j + 1]) {
-                    swapped = true;
-                    [copy[j], copy[j + 1]] = [copy[j + 1], copy[j]];
-                    setSwap([j, j + 1]);
-                    await sleep(latestSpeed.current);
-                    setLocalArr([...copy]);
-                    await sleep(latestSpeed.current);
-                }
+                setSwap([j+1, j])
+                await sleep(latestSpeed.current);
+                [copy[j], copy[j + 1]] = [copy[j + 1], copy[j]];
+                setLocalArr([...copy]);
+                await sleep(latestSpeed.current);
                 setSwap([]);
+                j = j - 1;
             }
-            if (!swapped) break;
+            setComp([]);
         }
         setSorted(true);
+        setCompare([]);
     }
 
     return (
@@ -88,12 +88,14 @@ export default function Bubble({ arr, speedRef }) {
                 </div>)
             }
             </div>
-            <div className="mt-15 flex gap-4">
+            <div className="mt-15">
             <button className="cursor-pointer border-2 px-4 py-2 rounded-sm bg-green-200 hover:bg-green-300" onClick={() => {
                 if (stopRef.current == true)
-                    bubbleSort()
+                    insertionSort()
             }}>Start</button>
             </div>
         </div>
     )
 }
+
+

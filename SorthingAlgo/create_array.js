@@ -4,6 +4,8 @@ import { setData, setArray_size, setmax_Element, setmin_Element, setSpeed } from
 import { useSelector } from "react-redux";
 import Bubble from "./bubbleSort";
 import Selection_sort_compo from "./selectionSort";
+import InsertionSort_compo from "./insertionSort";
+import MergeSort from "./mergeSort";
 
 export default function Create() {
     const dispatch = useDispatch();
@@ -105,6 +107,7 @@ export default function Create() {
                     >
                         <option value="Bubble Sort">Bubble Sort</option>
                         <option value="Selection Sort">Selection Sort</option>
+                        <option value="Insertion Sort">Insertion Sort</option>
                         <option value="Merge Sort">Merge Sort</option>
                         <option value="Quick Sort">Quick Sort</option>
                     </select>
@@ -117,6 +120,8 @@ export default function Create() {
                 {/* <Selection_sort_compo></Selection_sort_compo> */}
                 {algorithm === "Bubble Sort" && <Bubble arr={arr} speedRef={speedRef} />}
                 {algorithm === "Selection Sort" && <Selection_sort_compo arr={arr} speedRef={speedRef} />}
+                {algorithm === "Insertion Sort" && <InsertionSort_compo arr={arr} speedRef={speedRef} />}
+                {algorithm === "Merge Sort" && <MergeSort arr={arr} speedRef={speedRef}/>}
                 {/* {algorithm === "quick" && <QuickSort arr={arr} speed={speed} />} */}
             </div>
 
